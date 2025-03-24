@@ -11,7 +11,7 @@ docker-compose up
 ```
 3. Ouvrir l'API  
 ```
-http://localhost:5000
+http://localhost:5000/get_games
 ```
 
 ## Description 
@@ -27,15 +27,15 @@ http://localhost:5000
 ## Tests
 
 J'ai effectué mes tests à l'aide de **Postman** et en voici des captures d'écran:
-###/get/games
+### /get/games
 ![test get](tests/test_get.PNG)
-###/add_games 
-![test post](tests/test_post.PNG)
+### /add_games 
+![test post](tests/test_post.PNG)  
 Sans nom: 
 ![test post](tests/test_post_invalide.PNG)
-###modif_game
+### /modif_game
 ![test put](tests/test_put.PNG)
-###del_game
+### del_game
 ![test del](tests/test_del.PNG)
-###dashboard
+### dashboard
 ![test dashboard](tests/test_dashboard.PNG)
