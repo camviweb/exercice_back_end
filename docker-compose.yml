@@ -6,7 +6,6 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - DATABASE_URL=postgresql://root:mdp@db/game_db
       - FLASK_ENV=development
     depends_on:
       - db

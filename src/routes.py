@@ -56,7 +56,11 @@ def update(id):
     data = request.get_json()
 
     game.name = data.get('name', game.name)
-    game.release_date = datetime.strptime(data['release_date'], '%Y-%m-%d') if 'release_date' in data else game.release_date
+    if 'release_date' in data:
+        try:
+            game.release_date = datetime.strptime(data['release_date'], '%Y-%m-%d')
+        except ValueError:
+            return jsonify({"error": "Le format de la date de parution est incorrect !"}), 400
     game.studio = data.get('studio', game.studio)
     game.ratings = data.get('ratings', game.ratings)
     game.platforms = data.get('platforms', game.platforms)
@@ -80,3 +84,29 @@ def delete(id):
     db.session.delete(game)
     db.session.commit()
     return jsonify({'message': 'Jeu supprimé !'}), 200
+# dashboard
+@games_bp.route('/dashboard', methods=['GET'])
+def dashboard():
+    best_games = Game.query.filter(Game.ratings > 18).all()
+
+    platform_counts = {}
+    games = Game.query.all()
+    for game in games:
+        for platform in game.platforms:
+            if platform in platform_counts:
+                platform_counts[platform] += 1
+            else:
+                platform_counts[platform] = 1
+
+    dashboard = {
+        'best_games': [{
+            'name': game.name,
+            'studio': game.studio,
+            'ratings': game.ratings,
+            'release_date': game.release_date,
+            'platforms': game.platforms
+        } for game in best_games],
+        'games_by_platform': platform_counts
+    }
+
+    return jsonify(dashboard), 200
