@@ -29,6 +29,27 @@ def data():
                 studio="Capybara Games",
                 ratings=17,
                 platforms=["PC", "PS4", "Switch", "One", "WiiU", "PS3"]
+            ), 
+            Game(
+                name="Overwatch",
+                release_date=datetime.strptime("2016-05-24", "%Y-%m-%d"),
+                studio="Blizzard Entertainment",
+                ratings=18,
+                platforms=["PC", "PS4", "Xbox One"]
+            ),
+            Game(
+                name="Minecraft",
+                release_date=datetime.strptime("2011-11-18", "%Y-%m-%d"),
+                studio="Mojang Studios",
+                ratings=20,
+                platforms=["PC", "PS4", "Xbox One", "Switch"]
+            ),
+            Game(
+                name="The Legend of Zelda: Breath of the Wild",
+                release_date=datetime.strptime("2017-03-03", "%Y-%m-%d"),
+                studio="Nintendo",
+                ratings=20,
+                platforms=["Switch"]
             )
         ]
         db.session.bulk_save_objects(games)
